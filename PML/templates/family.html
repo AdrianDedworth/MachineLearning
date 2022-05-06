@@ -2,7 +2,21 @@
 
 {% block content %}
 <div class="right-side">
-    <h1 style="height: 2.8em; background-color: #f1f2f6; text-align: center; font-size: 20px; padding-top: 13px;">Family</h1>
+    <h1 style="height: 2.8em; background-color: #f1f2f6; text-align: center; font-size: 20px; padding-top: 13px;">Familia</h1>
+    <div class="right-bottom">
+        <form class="add-family-form" action="/upload" method="post" enctype="multipart/form-data">
+            <label for="fname">Nombre:</label><br>
+            <input type="text" id="fname" name="fname" value="" class="field-fam-data"><br>
+            <label for="lname">Apellidos:</label><br>
+            <input type="text" id="lname" name="lname" value="" class="field-fam-data"><br><br>
+            <input type="file" id="uploadFile" name="uploadFile" class="btn-choose-img"><br>
+            <input type="submit" value="Aceptar" class="btn-bottom">
+            <input type="submit" value="Cancelar" class="btn-bottom">
+        </form>
+        <div class="photo-preview">
+            <input class="new-user-photo" type="image" src="{{ url_for('static', filename='source/img/ana.jpg') }}" alt="photo">
+        </div>
+    </div>
+    <!--<img src="{{ url_for('static', filename='source/img/ana.jpg') }}" alt="" class="photo-family-example">-->
 </div>
-
 {% endblock %}
