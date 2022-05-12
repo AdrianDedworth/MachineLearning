@@ -4,7 +4,7 @@ import os
 
 app = Flask(__name__, template_folder='templates')
 app.config["UPLOAD_FOLDER"] = "static/uploads"
-ALLOWED_EXTENSIONS = set(['png', "jpg", "jpeg"])
+ALLOWED_EXTENSIONS = set(['mp4', "avi", "wmv", "mpg", "png"])
 
 @app.route('/')
 def home():
@@ -20,7 +20,7 @@ def family():
 
 def allowed_file(file):
     file = file.split('.')
-    if file[1] in ALLOWED_EXTENSIONS:
+    if file[1].lower() in ALLOWED_EXTENSIONS:
         return True
     return False
 
@@ -30,10 +30,19 @@ def upload():
     print(file, file.filename)
     filename = secure_filename(file.filename)
     print(filename)
+
+    usrID = request.form['idfam']
+    pathToSave = os.path.join(app.config["UPLOAD_FOLDER"], usrID)
+
+    if not os.path.exists(pathToSave):
+        print("carpeta creada: " + pathToSave)
+        os.mkdir(pathToSave)
+
     if file and allowed_file(filename):
-        print("permitido")
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-    return 'A'
+        print("Archivo guardado")
+        file.save(os.path.join(pathToSave, filename))
+    #form.mytext.data = ""
+    return render_template('family.html')
 
 @app.route('/recording')
 def recording():

@@ -5,21 +5,23 @@
     <h1 style="height: 2.8em; background-color: #f1f2f6; text-align: center; font-size: 20px; padding-top: 13px;">Familia</h1>
     <p class="form-description">Agregar a un familiar para que la cámara no lo detecte como intruso</p>
     <div class="right-bottom">
-        <form class="add-family-form" action="/upload" method="post" enctype="multipart/form-data">
+        <form class="add-family-form" action="/upload" method="post" enctype="multipart/form-data" id="form-add-new">
             <label for="lname">ID</label><br>
-            <input type="text" id="id-fam" name="id-fam" value="1" class="field-fam-data" disabled><br>
+            <input type="text" id="id-fam" name="idfam" value="1" class="field-fam-data field-id" readonly><br>
             <label for="fname">Nombre</label><br>
             <input type="text" id="fname" name="fname" value="" class="field-fam-data"><br>
             <label for="lname">Apellidos</label><br>
             <input type="text" id="lname" name="lname" value="" class="field-fam-data"><br>
             <label for="lname">Número de celular</label><br>
-            <input type="text" id="num-cel" name="num-cel" value="" class="field-fam-data"><!--<input type="checkbox" class="check-num">--><br><br>
-            <input type="file" id="uploadFile" name="uploadFile" class="btn-choose-img"><br>
-            <input type="submit" value="Aceptar" class="btn-bottom">
-            <input type="submit" value="Cancelar" class="btn-bottom">
+            <input type="text" id="num-cel" name="num-cel" value="" class="field-fam-data" maxlength="9" minlength="9"><!--<input type="checkbox" class="check-num">--><br><br>
+            <label for="uploadFile" class="lbluploadFile" id="lbluploadFile">Seleccionar Archivo</label>
+            <input type="file" id="uploadFile" name="uploadFile" class="btn-choose-img" hidden><br>
+            <input type="submit" value="Subir Archivo" class="btn-bottom" id="btn-accept"><br>
+            <input type="submit" value="Cancelar" class="btn-bottom" id="btn-cancel">
         </form>
-        <div class="photo-preview">
-            <input class="new-user-photo" type="image" src="{{ url_for('static', filename='source/img/ana.jpg') }}" alt="photo">
+        <div class="entrena-section">
+            <p>Archivo Subido Existosamente</p>
+            <input type="button" value="Iniciar Entrenamiento" class="btn-entrena">
         </div>
     </div>
 </div>

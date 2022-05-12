@@ -83,13 +83,14 @@
     align-self: center;
     align-items: center;
     justify-content: space-around;
-    width: 80%;
-    height: 55%;
+    width: 85%;
+    height: 80%;
     border: 1px solid #2c2c54;
 }
 
 .add-family-form {
     text-align: center;
+    border-right: #2c2c54;
     /*background-color: #2c2c54;*/
 }
 
@@ -100,17 +101,54 @@
 
 .btn-bottom {
     margin-top: 15px;
-    width: 100px;
-    justify-content: space-between;
+    width: 160px;
+    height: 40px;
+    font-size: 15px;
+}
+
+#btn-cancel{
+    position: relative;
+    border-radius: 3px;
+    color: #FFF;
+    background-color: #dc3545;
+    border: none;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+#btn-cancel:hover{
+    background: #ff3636;
+}
+
+#btn-cancel:active{
+    -webkit-transform: translate(0px,5px);
+    -ms-transform: translate(0px,5px);
+    transform: translate(0px,5px);
+}
+
+#btn-accept{
+    position: relative;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #198754;
+    border: none;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+}
+
+#btn-accept:hover{
+    background: #4e8719;
+}
+
+#btn-accept:active{
+    -webkit-transform: translate(0px,5px);
+    -ms-transform: translate(0px,5px);
+    transform: translate(0px,5px);
+    border-bottom: 1px solid #2ecc71;
 }
 
 .btn-choose-img {
     width: 250px;
-}
-
-.btn-bottom:hover {
-    border: 1px solid cornflowerblue;
-    background-color: lightblue;
 }
 
 .field-fam-data {
@@ -120,22 +158,53 @@
     text-align: center;
 }
 
+.field-id{
+    border: 2px solid gray;
+    color: gray;
+}
+
 .photo-family-example {
     width: 15%;
 }
 
-.photo-preview {
-    width: 18.25%;
-    height: 60%;
+.lbluploadFile{
+    padding-top: 6px;
+    height: 40px;
+    width: 250px;
+    align-items: center;
+    position: relative;
+    border-radius: 3px;
+    color: #333;
+    border: 1px solid #2c2c54;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+    background-color: #ffc107;
 }
 
-.new-user-photo{
-    height: 100%;
-    object-fit: cover;
+.lbluploadFile:hover{
+    transform: scale(1.04);
+    background-color: #ffe607;
 }
 
-.check-num{
-    padding-left: 10px;
-    width: 20px;
-    height: 20px;
+.lbluploadFile:active{
+    -webkit-transform: translate(0px,5px);
+    -ms-transform: translate(0px,5px);
+    transform: translate(0px,5px);
+}
+
+.lbluploadFile span{
+    font-family: normal;
+}
+
+.btn-entrena{
+    height: 40px;
+    width: 200px;
+    align-items: center;
+    position: relative;
+    border-radius: 3px;
+    color: #333;
+    border: 1px solid #2c2c54;
+    -webkit-transition: all 0.1s;
+    transition: all 0.1s;
+    background-color: #ffc107;
 }
