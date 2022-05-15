@@ -11,8 +11,8 @@
 
 .left-side {
     width: 15%;
-    height: 100vh;
-    min-height: 100%;
+    height: 92vh;
+    min-height: 92%;
     background-color: #2c2c54;
 }
 
@@ -207,4 +207,16 @@
     -webkit-transition: all 0.1s;
     transition: all 0.1s;
     background-color: #ffc107;
+}
+
+/* validaciones */
+
+.input-data-correct .label-data-correct{
+    color: #06cd2a;
+    opacity: 1;
+}
+
+.input-data-incorrect .label-data-incorrect{
+    color: red;
+    opacity: 1;
 }

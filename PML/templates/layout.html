@@ -24,7 +24,7 @@
             <div class="button-container">
                 <button class="left-button" onclick="location.href='/'"><i class="fa fa-home" style="font-size: 23px;"></i> Inicio</button>
                 <button class="left-button" onclick="location.href='/camera'"><i class="fa fa-camera"></i> Camara en vivo</button>
-                <button class="left-button" onclick="location.href='/family'"><i class="fa fa-users"></i> Familiares</button>
+                <button class="left-button" onclick="location.href='/family'"><i class="fa fa-users"></i> Agregar Familiares</button>
                 <button class="left-button" onclick="location.href='/recording'"><i class="fa fa-video-camera"></i> Grabaciones</button>
             </div>
         </div>
@@ -32,7 +32,15 @@
         {% block content %}
         {% endblock %}
     </main>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <center class="alert alert-{{ category }}" role="alert">{{ message }}</center>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
     <script src="{{ url_for('static', filename='js/namefile.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/inputFile.js') }}"></script>
 </body>
 
 </html>
