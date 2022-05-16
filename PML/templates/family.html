@@ -9,11 +9,11 @@
             <label for="lname">ID</label><br>
             <input type="text" id="id-fam" name="idfam" value="1" class="field-fam-data field-id" readonly><br>
             <label for="fname">Nombre</label><br>
-            <input type="text" id="fname" name="fname" value="" class="field-fam-data" required="" pattern="[a-zA-Z]+" minlength="2"><br>
+            <input type="text" id="fname" name="fname" value="{{ name }}" class="field-fam-data" required="" pattern="[a-zA-Z]+" minlength="2"><br>
             <label for="lname">Apellidos</label><br>
-            <input type="text" id="lname" name="lname" value="" class="field-fam-data" required="" pattern="[a-zA-ZÀ-ÿ\s]+" minlength="2"><br>
+            <input type="text" id="lname" name="lname" value="{{ lname }}" class="field-fam-data" required="" pattern="[a-zA-ZÀ-ÿ\s]+" minlength="2"><br>
             <label for="lname">Número de celular (opcional)</label><br>
-            <input type="text" id="num-cel" name="num-cel" value="" class="field-fam-data" maxlength="9" minlength="9" pattern="[0-9]+"><!--<input type="checkbox" class="check-num">--><br><br>
+            <input type="text" id="num-cel" name="num-cel" value="{{ telef }}" class="field-fam-data" maxlength="9" minlength="9" pattern="[0-9]+"><!--<input type="checkbox" class="check-num">--><br><br>
             <label for="uploadFile" class="lbluploadFile" id="lbluploadFile">Seleccionar Video</label>
             <input type="file" id="uploadFile" name="uploadFile" class="btn-choose-img" hidden required="" accept="video/*"><br>
             <input type="submit" value="Subir Video" class="btn-bottom" id="btn-accept" onclick="checkFile()"><br>

@@ -5,7 +5,7 @@ import os
 app = Flask(__name__, template_folder='templates')
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.secret_key = 'rtxz'
-ALLOWED_EXTENSIONS = set(['mp4', "avi", "wmv", "mpg", "png"])
+ALLOWED_EXTENSIONS = set(['mp4', "avi", "wmv", "mpg"])
 
 @app.route('/')
 def home():
@@ -45,18 +45,19 @@ def upload():
         os.mkdir(pathToSave)
 
     if file and allowed_file(filename):
-        print("Archivo guardado")
+        print("Video guardado")
         archivoEstado = 1
         file.save(os.path.join(pathToSave, filename))
     else:
         archivoEstado = 0
 
     if archivoEstado == 1:
-        flash("Archivo subido y listo para iniciar entrenamiento", "success")
+        flash("Video subido y listo para iniciar entrenamiento", "success")
+        return render_template('family.html')
     elif archivoEstado == 0:
         print("video con formato invalido")
         flash("Datos no guardados...\nvideo con formato invalido... Formatos aceptados: mp4, avi, mpg o wmv", "danger")
-    return render_template('family.html')
+        return render_template('family.html', name = usrName, lname = usrLName, telef = usrTel)
 
 @app.route('/recording')
 def recording():
