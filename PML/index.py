@@ -1,6 +1,8 @@
+from colorama import Cursor
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, flash
 import os
+from src.connect_sqlserver import connection
 
 app = Flask(__name__, template_folder='templates')
 app.config["UPLOAD_FOLDER"] = "static/uploads"
@@ -17,7 +19,15 @@ def camera():
 
 @app.route('/family')
 def family():
-    return render_template('family.html')
+    cursorGetID = connection.cursor()
+
+    high_ID = "SELECT  TOP 1 IDUsuario from tblUsuario ORDER BY IDUsuario DESC"
+    cursorGetID.execute(high_ID)
+
+    usrID = cursorGetID.fetchval()
+
+    usrID += 1
+    return render_template('family.html', ID_usuario = usrID)
 
 def allowed_file(file):
     file = file.split('.')
@@ -53,7 +63,17 @@ def upload():
 
     if archivoEstado == 1:
         flash("Video subido y listo para iniciar entrenamiento", "success")
-        return render_template('family.html')
+        #inserta nuevo usuario
+        cursorInsert = connection.cursor()
+        columns = "INSERT INTO tblUsuario(Usuario_Nombre, Usuario_Apellido, Usuario_Telef, Usuario_Estado)"
+        newData = " VALUES ('"+usrName+"', '"+usrLName+"', '"+usrTel+"', 1)"
+
+        query_insert = columns + newData
+
+        cursorInsert.execute(query_insert)
+        connection.commit()
+
+        return render_template('home.html')
     elif archivoEstado == 0:
         print("video con formato invalido")
         flash("Datos no guardados...\nvideo con formato invalido... Formatos aceptados: mp4, avi, mpg o wmv", "danger")

@@ -7,7 +7,7 @@
     <div class="right-bottom">
         <form class="add-family-form" action="/upload" method="post" enctype="multipart/form-data" id="form-add-new">
             <label for="lname">ID</label><br>
-            <input type="text" id="id-fam" name="idfam" value="1" class="field-fam-data field-id" readonly><br>
+            <input type="text" id="id-fam" name="idfam" value="{{ ID_usuario }}" class="field-fam-data field-id" readonly><br>
             <label for="fname">Nombre</label><br>
             <input type="text" id="fname" name="fname" value="{{ name }}" class="field-fam-data" required="" pattern="[a-zA-Z]+" minlength="2"><br>
             <label for="lname">Apellidos</label><br>
