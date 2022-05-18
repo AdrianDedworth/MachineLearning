@@ -14,14 +14,19 @@
             <input type="text" id="lname" name="lname" value="{{ lname }}" class="field-fam-data" required="" pattern="[a-zA-ZÀ-ÿ\s]+" minlength="2"><br>
             <label for="lname">Número de celular (opcional)</label><br>
             <input type="text" id="num-cel" name="num-cel" value="{{ telef }}" class="field-fam-data" maxlength="9" minlength="9" pattern="[0-9]+"><!--<input type="checkbox" class="check-num">--><br><br>
-            <label for="uploadFile" class="lbluploadFile" id="lbluploadFile">Seleccionar Video</label>
+            <label for="uploadFile" class="lbluploadFile" id="lbluploadFile">Elegir Video</label>
             <input type="file" id="uploadFile" name="uploadFile" class="btn-choose-img" hidden required="" accept="video/*"><br>
             <input type="submit" value="Subir Video" class="btn-bottom" id="btn-accept" onclick="checkFile()"><br>
             <input type="submit" value="Cancelar" class="btn-bottom" id="btn-cancel">
         </form>
-        <div class="entrena-section">
+        <!--<form class="entrena-section" action="/entrena">
+            <h2>ENTRENAMIENTO</h2>
+            <P>Paso 1: Elige el video que subiste anteriormente para el entrenamiento</P>
+            <p>Paso 2: Click en el botón iniciar entrenamiento</p>
+            <label for="entrena" class="lblentrena" id="lblentrena">Elegir Video</label>
+            <input type="file" id="entrena" name="entrena" class="btn-choose-img" hidden required="" accept="video/*"><br>
             <input type="button" value="Iniciar Entrenamiento" class="btn-entrena">
-        </div>
+        </form>-->
     </div>
 </div>
 {% endblock %}

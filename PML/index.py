@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, flash
 import os
 from src.connect_sqlserver import connection
+from static.capture import CaptureFaces
 
 app = Flask(__name__, template_folder='templates')
 app.config["UPLOAD_FOLDER"] = "static/uploads"
@@ -21,8 +22,8 @@ def camera():
 def family():
     cursorGetID = connection.cursor()
 
-    high_ID = "SELECT  TOP 1 IDUsuario from tblUsuario ORDER BY IDUsuario DESC"
-    cursorGetID.execute(high_ID)
+    highest_ID = "SELECT  TOP 1 IDUsuario from tblUsuario ORDER BY IDUsuario DESC"
+    cursorGetID.execute(highest_ID)
 
     usrID = cursorGetID.fetchval()
 
@@ -78,6 +79,11 @@ def upload():
         print("video con formato invalido")
         flash("Datos no guardados...\nvideo con formato invalido... Formatos aceptados: mp4, avi, mpg o wmv", "danger")
         return render_template('family.html', name = usrName, lname = usrLName, telef = usrTel)
+
+# @app.route('/entrena', methods=["POST", "GET"])
+# def entrena():
+#     videoPath = request.path['entrena']
+#     CaptureFaces(videoPath)
 
 @app.route('/recording')
 def recording():
