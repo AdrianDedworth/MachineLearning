@@ -2,13 +2,14 @@ from colorama import Cursor
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, flash
 import os
-from src.connect_sqlserver import connection
-from static.capture import CaptureFaces
+from src.CheckExtension import allowed_file
+from src.InsertUser import InsertUser
+from src.NewID import NewID
+#from static.capture import CaptureFaces
 
 app = Flask(__name__, template_folder='templates')
 app.config["UPLOAD_FOLDER"] = "static/uploads"
 app.secret_key = 'rtxz'
-ALLOWED_EXTENSIONS = set(['mp4', "avi", "wmv", "mpg"])
 
 @app.route('/')
 def home():
@@ -20,28 +21,15 @@ def camera():
 
 @app.route('/family')
 def family():
-    cursorGetID = connection.cursor()
-
-    highest_ID = "SELECT  TOP 1 IDUsuario from tblUsuario ORDER BY IDUsuario DESC"
-    cursorGetID.execute(highest_ID)
-
-    usrID = cursorGetID.fetchval()
-
-    usrID += 1
+    usrID = NewID()
     return render_template('family.html', ID_usuario = usrID)
-
-def allowed_file(file):
-    file = file.split('.')
-    if file[1].lower() in ALLOWED_EXTENSIONS:
-        return True
-    return False
 
 @app.route('/upload', methods=["POST", "GET"])
 def upload():
     file = request.files["uploadFile"]
-    print(file, file.filename)
+    #print(file, file.filename)
     filename = secure_filename(file.filename)
-    print(filename)
+    #print(filename)
 
     # Creating folder to save the video
     usrID = request.form['idfam']
@@ -52,32 +40,20 @@ def upload():
     usrTel = request.form['num-cel']
 
     if not os.path.exists(pathToSave):
-        print("carpeta creada: " + pathToSave)
+        #print("carpeta creada: " + pathToSave)
         os.mkdir(pathToSave)
 
     if file and allowed_file(filename):
-        print("Video guardado")
-        archivoEstado = 1
+        #print("Video guardado")
         file.save(os.path.join(pathToSave, filename))
-    else:
-        archivoEstado = 0
-
-    if archivoEstado == 1:
-        flash("Video subido y listo para iniciar entrenamiento", "success")
+        flash("Datos guardados. Video subido y listo para iniciar entrenamiento", "success")
         #inserta nuevo usuario
-        cursorInsert = connection.cursor()
-        columns = "INSERT INTO tblUsuario(Usuario_Nombre, Usuario_Apellido, Usuario_Telef, Usuario_Estado)"
-        newData = " VALUES ('"+usrName+"', '"+usrLName+"', '"+usrTel+"', 1)"
-
-        query_insert = columns + newData
-
-        cursorInsert.execute(query_insert)
-        connection.commit()
-
-        return render_template('home.html')
-    elif archivoEstado == 0:
-        print("video con formato invalido")
-        flash("Datos no guardados...\nvideo con formato invalido... Formatos aceptados: mp4, avi, mpg o wmv", "danger")
+        InsertUser(usrName, usrLName, usrTel)
+        usrID = NewID()
+        return render_template('family.html', ID_usuario = usrID)
+    else:
+        #print("video con formato invalido")
+        flash("Datos no guardados.\nVideo con formato invalido. Formatos aceptados: mp4, avi, mpg o wmv", "danger")
         return render_template('family.html', name = usrName, lname = usrLName, telef = usrTel)
 
 # @app.route('/entrena', methods=["POST", "GET"])
