@@ -1,16 +1,20 @@
 import cv2
 import imutils
+import os
 
 def CaptureFace():
-    dataPath = 'static/uploads/'
+    videoPath = '../static/uploads/'
+
+    pathToSavePhotos = '../static/uploads/' + '1' + '/rostros'
+    os.mkdir(pathToSavePhotos)
 
     #path = path.split('/')
     #vid_name = path[1]
 
-    dataPath = dataPath + '1/' #path[0]
+    videoPath = videoPath + '1/' #path[0]
     #print(vid_name)
 
-    cap = cv2.VideoCapture(dataPath + 'test_video.mp4')
+    cap = cv2.VideoCapture(videoPath + 'test_video.mp4')
 
     faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
     count = 0
@@ -28,7 +32,7 @@ def CaptureFace():
             cv2.rectangle(frame, (x,y), (x+w, +h), (0,255,0), 2)
             rostro = auxframe[y:y+h,x:x+w]
             rostro = cv2.resize(rostro, (150,150),interpolation=cv2.INTER_CUBIC)
-            cv2.imwrite(dataPath + '/rostro_{}.jpg'.format(count), rostro)
+            cv2.imwrite(pathToSavePhotos + '/rostro_{}.jpg'.format(count), rostro)
             count += 1
         cv2.imshow('frame', frame)
 
