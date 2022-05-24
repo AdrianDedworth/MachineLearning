@@ -1,14 +1,16 @@
-from colorama import Cursor
+import time
+from logging import captureWarnings
 from werkzeug.utils import secure_filename
 from flask import Flask, render_template, request, flash
 import os
 from src.CheckExtension import allowed_file
 from src.InsertUser import InsertUser
-from src.NewID import NewID
-#from static.capture import CaptureFaces
+from src.GetID import GetID
+from src.Entrenamiento import TrainingSystem
+from src.capture import CaptureFace
 
 app = Flask(__name__, template_folder='templates')
-app.config["UPLOAD_FOLDER"] = "static/uploads"
+app.config["UPLOAD_FOLDER"] = "static/uploads/"
 app.secret_key = 'rtxz'
 
 @app.route('/')
@@ -21,8 +23,7 @@ def camera():
 
 @app.route('/family')
 def family():
-    usrID = NewID()
-    return render_template('family.html', ID_usuario = usrID)
+    return render_template('family.html')
 
 @app.route('/upload', methods=["POST", "GET"])
 def upload():
@@ -32,8 +33,8 @@ def upload():
     #print(filename)
 
     # Creating folder to save the video
-    usrID = request.form['idfam']
-    pathToSave = os.path.join(app.config["UPLOAD_FOLDER"], usrID)
+    usrID = GetID() + 1
+    pathToSave = os.path.join(app.config["UPLOAD_FOLDER"], str(usrID))
 
     usrName = request.form['fname']
     usrLName = request.form['lname']
@@ -49,17 +50,26 @@ def upload():
         flash("Datos guardados. Video subido y listo para iniciar entrenamiento", "success")
         #inserta nuevo usuario
         InsertUser(usrName, usrLName, usrTel)
-        usrID = NewID()
-        return render_template('family.html', ID_usuario = usrID)
+
+        #cambio de nombre del archivo de video para facilitar su uso
+        extension = filename.split('.')
+        newVideoName = str(usrID) + '.' + extension[1]
+        destination = pathToSave + '/' + newVideoName
+        source = os.path.join(pathToSave, filename)
+        os.rename(source, destination)
+
+        return render_template('family.html')
     else:
         #print("video con formato invalido")
         flash("Datos no guardados.\nVideo con formato invalido. Formatos aceptados: mp4, avi, mpg o wmv", "danger")
         return render_template('family.html', name = usrName, lname = usrLName, telef = usrTel)
 
-# @app.route('/entrena', methods=["POST", "GET"])
-# def entrena():
-#     videoPath = request.path['entrena']
-#     CaptureFaces(videoPath)
+@app.route('/entrena', methods=["POST", "GET"])
+def entrena():
+    CaptureFace()
+    time.sleep(2)
+    trainingText = TrainingSystem()
+    return render_template('family.html', trainingText = trainingText)
 
 @app.route('/recording')
 def recording():

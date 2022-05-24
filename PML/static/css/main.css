@@ -84,7 +84,7 @@
     align-items: center;
     justify-content: space-around;
     width: 85%;
-    height: 80%;
+    height: 50%;
     border: 1px solid #2c2c54;
 }
 
@@ -101,7 +101,7 @@
 
 .btn-bottom {
     margin-top: 15px;
-    width: 160px;
+    width: 122px;
     height: 40px;
     font-size: 15px;
 }
@@ -127,6 +127,7 @@
 }
 
 #btn-accept{
+    margin-left: 105px;
     position: relative;
     border-radius: 3px;
     color: #fff;
@@ -137,7 +138,7 @@
 }
 
 #btn-accept:hover{
-    background: #4e8719;
+    background: #2ecc71;
 }
 
 #btn-accept:active{
@@ -155,35 +156,31 @@
     margin-top: 10px;
     margin-bottom: 10px;
     width: 250px;
+    height: 30px;
     text-align: center;
-}
-
-.field-id{
-    border: 2px solid gray;
-    color: gray;
-}
-
-.photo-family-example {
-    width: 15%;
+    border: 1px solid #2c2c54;
 }
 
 .lbluploadFile{
+    margin-left: 105px;
+    margin-top: 5px;
     padding-top: 6px;
     height: 40px;
     width: 250px;
     align-items: center;
     position: relative;
     border-radius: 3px;
-    color: #333;
+    color: #fff;
     border: 1px solid #2c2c54;
     -webkit-transition: all 0.1s;
     transition: all 0.1s;
-    background-color: #ffc107;
+    background-color: #3d405b;
+    cursor: pointer;
 }
 
 .lbluploadFile:hover{
     transform: scale(1.04);
-    background-color: #ffe607;
+    background-color: #553d5b;
 }
 
 .lbluploadFile:active{
@@ -202,21 +199,29 @@
     align-items: center;
     position: relative;
     border-radius: 3px;
-    color: #333;
+    color: #fff;
     border: 1px solid #2c2c54;
     -webkit-transition: all 0.1s;
     transition: all 0.1s;
-    background-color: #ffc107;
+    background-image: linear-gradient(90deg,#414040,#522fa5);
 }
 
-/* validaciones */
-
-.input-data-correct .label-data-correct{
-    color: #06cd2a;
-    opacity: 1;
+.btn-entrena:hover{
+    background-image: linear-gradient(-90deg,#414040,#9265fc);
 }
 
-.input-data-incorrect .label-data-incorrect{
-    color: red;
-    opacity: 1;
+.lbl-form{
+    width: 100px;
+}
+
+.entrena-section{
+    /* background-color: #2ecc71; */
+    width: 35%;
+    height: 100%;
+    text-align: center;
+}
+
+.entrena-text{
+    font-size: 13.5px;
+    /*background-color: #2ecc71;*/
 }

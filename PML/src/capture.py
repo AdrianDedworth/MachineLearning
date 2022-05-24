@@ -1,20 +1,18 @@
 import cv2
 import imutils
 import os
+from src.GetID import GetID
 
 def CaptureFace():
+    usrID = GetID()
     videoPath = '../static/uploads/'
 
-    pathToSavePhotos = '../static/uploads/' + '1' + '/rostros'
+    pathToSavePhotos = '../static/uploads/' + str(str(usrID)) + '/rostros'
     os.mkdir(pathToSavePhotos)
 
-    #path = path.split('/')
-    #vid_name = path[1]
+    videoPath = videoPath + str(usrID)
 
-    videoPath = videoPath + '1/' #path[0]
-    #print(vid_name)
-
-    cap = cv2.VideoCapture(videoPath + 'test_video.mp4')
+    cap = cv2.VideoCapture(videoPath + str(usrID) + '/' + str(usrID) + '.mp4')
 
     faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
     count = 0
@@ -41,5 +39,3 @@ def CaptureFace():
             break
     cap.release()
     cv2.destroyAllWindows()
-
-CaptureFace()

@@ -1,36 +1,42 @@
 import cv2
 import os
+import time
 import numpy as np
+from src.GetID import GetID
 
-dataPath = '../static/uploads'
-peopleList = os.listdir(dataPath)
+def TrainingSystem():
+    usrID = GetID()
+    dataPath = '../static/uploads'
+    peopleList = os.listdir(dataPath)
 
-#print('Lista de Personas: ', peopleList)
+    #print('Lista de Personas: ', peopleList)
 
-labels = []
-facesData = []
-label = 1
+    labels = []
+    facesData = []
+    label = str(usrID)
 
-for nameDir in peopleList:
-    usrPath = dataPath + '/' + '1' + '/rostros' #Cambiar el '1' por una variable que contenga el nombre de carpeta
-    print("Leyendo imágenes")
+    for nameDir in peopleList:
+        usrPath = dataPath + '/' + str(usrID) + '/rostros'
+        print("Leyendo imágenes")
 
-    for fileName in os.listdir(usrPath):
-        print('Rostros: ', nameDir + '/' + fileName)
-        labels.append(label)
-        facesData.append(cv2.imread(usrPath + '/' + fileName, 0))
-        image = cv2.imread(usrPath + '/' + fileName, 0)
+        for fileName in os.listdir(usrPath):
+            print('Rostros: ', nameDir + '/' + fileName)
+            labels.append(label)
+            facesData.append(cv2.imread(usrPath + '/' + fileName, 0))
+            #image = cv2.imread(usrPath + '/' + fileName, 0)
 
-label += 1
+    faceRecognizer = cv2.face.LBPHFaceRecognizer_create()
 
-faceRecognizer = cv2.face.LBPHFaceRecognizer_create()
+    print("Entrenando")
+    faceRecognizer.train(facesData, np.array(labels))
 
-print("Entrenando")
-faceRecognizer.train(facesData, np.array(labels))
-
-#Almacenar modelo obtenido
-os.chdir('../static/modelPeople')
-os.mkdir('1') # Cambiar el valor de 1 por una variable de nombre de carpeta
-os.chdir('1')
-faceRecognizer.write('LBPHFaceMethod.xml')
-print("Modelo alamacenado.")
+    #Almacenar modelo obtenido
+    os.chdir('../static/modelPeople')
+    os.mkdir(str(usrID))
+    os.chdir(str(usrID))
+    trainingFile = str(usrID) + '.xml'
+    faceRecognizer.write(trainingFile)
+    print("Modelo alamacenado.")
+    time.sleep(2)
+    statusMessage = "Entrenamiento Terminado Exitosamente"
+    return statusMessage
