@@ -17,11 +17,11 @@
             <input type="submit" value="Subir Video" class="btn-bottom" id="btn-accept" onclick="checkFile()">
             <input type="submit" value="Cancelar" class="btn-bottom" id="btn-cancel">
         </form>
-        <form class="entrena-section" action="/entrena" method="post" enctype="multipart/form-data">
+        <form class="entrena-section" action="/entrena">
             <h2 class="entrena-text">Antes de entrenar al sistema, debes registrar un usuario</h2>
             <img src="{{ url_for('static', filename='source/img/bot.png') }}" alt="" class="bot-img">
-            <input type="button" value="Iniciar Entrenamiento" class="btn-entrena" onclick="ShowTrainingText()">
-            <p id="training-text" class="training-text" style="display:none;margin-top: 5px;">{{ trainingText }}</p>
+            <input type="button" value="Iniciar Entrenamiento" class="btn-entrena" onclick="location.href='/entrena'">
+            <p id="training-text" class="training-text" style="margin-top: 5px; width: 282px; background-color: #2ecc71;">{{ trainingText }}</p>
         </form>
     </div>
 </div>

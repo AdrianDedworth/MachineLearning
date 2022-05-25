@@ -43,6 +43,8 @@ def upload():
     if not os.path.exists(pathToSave):
         #print("carpeta creada: " + pathToSave)
         os.mkdir(pathToSave)
+        facesFolder = pathToSave + '/rostros'
+        os.mkdir(facesFolder)
 
     if file and allowed_file(filename):
         #print("Video guardado")
@@ -64,12 +66,12 @@ def upload():
         flash("Datos no guardados.\nVideo con formato invalido. Formatos aceptados: mp4, avi, mpg o wmv", "danger")
         return render_template('family.html', name = usrName, lname = usrLName, telef = usrTel)
 
-@app.route('/entrena', methods=["POST", "GET"])
+@app.route('/entrena')
 def entrena():
     CaptureFace()
     time.sleep(2)
-    trainingText = TrainingSystem()
-    return render_template('family.html', trainingText = trainingText)
+    message = TrainingSystem()
+    return render_template('family.html', trainingText = message)
 
 @app.route('/recording')
 def recording():

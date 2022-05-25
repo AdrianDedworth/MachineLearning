@@ -1,19 +1,18 @@
 import cv2
 import os
-import time
 import numpy as np
 from src.GetID import GetID
 
 def TrainingSystem():
     usrID = GetID()
-    dataPath = '../static/uploads'
+    dataPath = 'C:/Users/max12/GIT_PULLS/MachineLearning/PML/static/uploads/'
     peopleList = os.listdir(dataPath)
 
     #print('Lista de Personas: ', peopleList)
 
     labels = []
     facesData = []
-    label = str(usrID)
+    label = usrID
 
     for nameDir in peopleList:
         usrPath = dataPath + '/' + str(usrID) + '/rostros'
@@ -31,12 +30,11 @@ def TrainingSystem():
     faceRecognizer.train(facesData, np.array(labels))
 
     #Almacenar modelo obtenido
-    os.chdir('../static/modelPeople')
+    os.chdir('C:/Users/max12/GIT_PULLS/MachineLearning/PML/static/modelPeople')
     os.mkdir(str(usrID))
     os.chdir(str(usrID))
     trainingFile = str(usrID) + '.xml'
     faceRecognizer.write(trainingFile)
     print("Modelo alamacenado.")
-    time.sleep(2)
     statusMessage = "Entrenamiento Terminado Exitosamente"
     return statusMessage

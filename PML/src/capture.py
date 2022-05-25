@@ -1,18 +1,16 @@
 import cv2
 import imutils
-import os
 from src.GetID import GetID
 
 def CaptureFace():
     usrID = GetID()
-    videoPath = '../static/uploads/'
+    videoPath = 'C:/Users/max12/GIT_PULLS/MachineLearning/PML/static/uploads/'
 
-    pathToSavePhotos = '../static/uploads/' + str(str(usrID)) + '/rostros'
-    os.mkdir(pathToSavePhotos)
+    pathToSavePhotos = videoPath + str(usrID) + '/rostros'
 
     videoPath = videoPath + str(usrID)
 
-    cap = cv2.VideoCapture(videoPath + str(usrID) + '/' + str(usrID) + '.mp4')
+    cap = cv2.VideoCapture(videoPath + '/' + str(usrID) + '.mp4')
 
     faceClassif = cv2.CascadeClassifier(cv2.data.haarcascades+'haarcascade_frontalface_default.xml')
     count = 0
