@@ -1,13 +1,13 @@
 import time
-from logging import captureWarnings
 from werkzeug.utils import secure_filename
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, Response
 import os
 from src.CheckExtension import allowed_file
 from src.InsertUser import InsertUser
 from src.GetID import GetID
 from src.Entrenamiento import TrainingSystem
 from src.capture import CaptureFace
+from src.videoStreaming import videoStreaming
 
 app = Flask(__name__, template_folder='templates')
 app.config["UPLOAD_FOLDER"] = "static/uploads/"
@@ -20,6 +20,10 @@ def home():
 @app.route('/camera')
 def camera():
     return render_template('camera.html')
+
+@app.route('/videoStream')
+def videoStream():
+    return Response(videoStreaming(), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 @app.route('/family')
 def family():
@@ -60,7 +64,7 @@ def upload():
         source = os.path.join(pathToSave, filename)
         os.rename(source, destination)
 
-        return render_template('family.html')
+        return render_template('family.html', entrenaStatus = "active")
     else:
         #print("video con formato invalido")
         flash("Datos no guardados.\nVideo con formato invalido. Formatos aceptados: mp4, avi, mpg o wmv", "danger")
@@ -71,11 +75,11 @@ def entrena():
     CaptureFace()
     time.sleep(2)
     message = TrainingSystem()
-    return render_template('family.html', trainingText = message)
+    return render_template('family.html', trainingText = message, entrenaStatus = "")
 
 @app.route('/recording')
 def recording():
     return render_template('recording.html')
 
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run(debug = False)

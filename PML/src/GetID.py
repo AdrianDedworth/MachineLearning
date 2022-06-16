@@ -1,10 +1,11 @@
-from src.connect_sqlserver import connection
+from src.connect_database import connection
 
 def GetID():
     cursorGetID = connection.cursor()
 
-    highest_ID = "EXEC SP_GetHighestID"
+    highest_ID = "CALL SP_GetHighestID"
     cursorGetID.execute(highest_ID)
 
-    usrID = cursorGetID.fetchval()
+    usrID = cursorGetID.fetchone()
+    usrID = usrID.get('IDUsuario')
     return usrID

@@ -20,8 +20,8 @@
         <form class="entrena-section" action="/entrena">
             <h2 class="entrena-text">Antes de entrenar al sistema, debes registrar un usuario</h2>
             <img src="{{ url_for('static', filename='source/img/bot.png') }}" alt="" class="bot-img">
-            <input type="button" value="Iniciar Entrenamiento" class="btn-entrena" onclick="location.href='/entrena'">
-            <p id="training-text" class="training-text" style="margin-top: 5px; width: 282px; background-color: #2ecc71;">{{ trainingText }}</p>
+            <input type="button" value="Iniciar Entrenamiento" class="btn-entrena {{ entrenaStatus }}" id="btn-entrena" onclick="ShowTrainingText(); location.href='/entrena'; deactivateEntrena();">
+            <p id="training-text" class="training-text-status" style="background-color: #2ecc71;">{{ trainingText }}</p>
         </form>
     </div>
 </div>
