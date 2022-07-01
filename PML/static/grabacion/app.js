@@ -120,7 +120,7 @@ function seleccioncamara() {
   };
   (async () => {
     console.log("Cargando modelo...");
-    modelo = await tf.loadLayersModel("http://localhost:5000/static/model/model.json");
+    modelo = await tf.loadLayersModel("http://localhost:5000/static/modelPet/model.json");
     console.log("Modelo cargado...");
   })();
 
