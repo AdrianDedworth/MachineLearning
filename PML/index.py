@@ -82,4 +82,4 @@ def recording():
     return render_template('recording.html')
 
 if __name__ == '__main__':
-    app.run(debug = False)
+    app.run(debug = True)
