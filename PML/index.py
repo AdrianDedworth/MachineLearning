@@ -73,7 +73,7 @@ def upload():
 @app.route('/entrena')
 def entrena():
     CaptureFace()
-    time.sleep(2)
+    time.sleep(1)
     message = TrainingSystem()
     return render_template('family.html', trainingText = message, entrenaStatus = "")
 

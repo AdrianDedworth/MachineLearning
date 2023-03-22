@@ -247,9 +247,9 @@
 }
 
 .facial-recog{
-    background-color: #522fa5;
+    /* background-color: #522fa5; */
     width: 48%;
-    margin-left: -65px;
+    margin-left: 50px;
 }
 
 .camera-name{
@@ -259,4 +259,8 @@
 .video-streaming{
     background-color: #dc3545;
     width: 90%;
+}
+/* PHONE SIZE */
+@media screen and (max-width:480px){
+
 }
